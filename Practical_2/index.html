@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Weather App</title>
+  <style>
+    /* Basic black and white styling for beginners */
+    body {
+      background: white;
+      color: black;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: white;
+      border: 2px solid black;
+      padding: 30px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: black;
+    }
+
+    .weather-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+
+    .weather-form input {
+      background: white;
+      color: black;
+      border: 1px solid black;
+      padding: 10px;
+      font-size: 14px;
+      width: 200px;
+      outline: none;
+    }
+
+    .weather-form input:focus {
+      border: 2px solid black;
+    }
+
+    .weather-form button {
+      background: white;
+      color: black;
+      border: 1px solid black;
+      padding: 10px 20px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .weather-form button:hover {
+      background: black;
+      color: white;
+    }
+
+    .weather-result {
+      margin-top: 20px;
+      font-size: 14px;
+      color: black;
+      min-height: 20px;
+      border-top: 1px solid black;
+      padding-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Simple Weather Checker</h1>
+    <div class="weather-form">
+      <input type="text" id="cityInput" placeholder="Enter city name" />
+      <button id="getWeatherBtn">Check Weather</button>
+    </div>
+    <div id="weatherResult" class="weather-result"></div>
+  </div>
+  <script>
+    // Hardcoded weather data for demo
+    const weatherData = {
+      Surat: { temp: 22, desc: "Sunny" },
+      surat: { temp: 22, desc: "Sunny" },
+      Ahemdabad: { temp: 18, desc: "Cloudy" },
+      ahemdabad: { temp: 18, desc: "Cloudy" },
+      Vadodra: { temp: 20, desc: "Partly Cloudy" },
+      vadodra: { temp: 20, desc: "Partly Cloudy" },
+      Nadiad: { temp: 25, desc: "Clear" },
+      nadiad: { temp: 25, desc: "Clear" },
+      Mumbai: { temp: 30, desc: "Humid" },
+      Anand: { temp: 30, desc: "Humid" },
+      anand: { temp: 30, desc: "Humid" }
+    };
+
+    const cityInput = document.getElementById("cityInput");
+    const getWeatherBtn = document.getElementById("getWeatherBtn");
+    const weatherResult = document.getElementById("weatherResult");
+
+    getWeatherBtn.addEventListener("click", () => {
+      const city = cityInput.value.trim();
+      if (!city) {
+        weatherResult.textContent = "Please enter a city name.";
+        return;
+      }
+      const weather = weatherData[city];
+      if (weather) {
+        weatherResult.textContent = `${city}: ${weather.temp}°C, ${weather.desc}`;
+      } else {
+        weatherResult.textContent = `Weather data for '${city}' not found.`;
+      }
+    });
+
+    cityInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        getWeatherBtn.click();
+      }
+    });
+  </script>
+</body>
+
+</html>
